@@ -138,8 +138,8 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-    // return drivebase.getAutonomousCommand("Center 1 coral");  Original code
-    return new PathPlannerAuto("L1 coral center");
+    return drivebase.getAutonomousCommand("New Auto"); // Original code said "New Path"
+    //return new PathPlannerAuto("L1 coral center");
   }
 
   public void setDriveMode()
