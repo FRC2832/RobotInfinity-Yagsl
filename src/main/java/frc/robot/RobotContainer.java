@@ -9,9 +9,11 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -22,6 +24,7 @@ import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 
 /**
@@ -82,6 +85,10 @@ public class RobotContainer
       () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
       () -> driverXbox.getRawAxis(2));
 
+  
+  // Anna added for autos (please remove this comment later)
+  private SendableChooser<Command> autoChooser;
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -89,6 +96,11 @@ public class RobotContainer
   {
     // Configure the trigger bindings
     configureBindings();
+
+    // Anna added for autos (please remove this comment later)
+    autoChooser = AutoBuilder.buildAutoChooser();
+    autoChooser.addOption("Do Nothing", Commands.none()); // remove later, just for testing
+    SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
   /**
@@ -137,8 +149,10 @@ public class RobotContainer
    */
   public Command getAutonomousCommand()
   {
+    // Anna added for autos (please remove this comment later)
+    return autoChooser.getSelected();
     // An example command will be run in autonomous
-    return drivebase.getAutonomousCommand("New Auto"); // Original code said "New Path"
+    // return drivebase.getAutonomousCommand("New Auto"); // Original code said "New Path"
     //return new PathPlannerAuto("L1 coral center");
   }
 

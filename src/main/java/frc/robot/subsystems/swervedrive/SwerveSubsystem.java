@@ -80,7 +80,11 @@ public class SwerveSubsystem extends SubsystemBase
     // Angle conversion factor is 360 / (GEAR RATIO * ENCODER RESOLUTION)
     //  In this case the gear ratio is 12.8 motor revolutions per wheel rotation.
     //  The encoder resolution per motor revolution is 1 per motor revolution.
-    double angleConversionFactor = SwerveMath.calculateDegreesPerSteeringRotation(12.8);
+    double angleConversionFactor = SwerveMath.calculateDegreesPerSteeringRotation(21.428);  //was 12.8! YIKES! Looking at the conversion factors printed 
+                          //on screen at deploy and based on NStrike (YAGSL author) recommendation of angle factor =16.8 
+                          //and drive factor = 0.04. Rev turning motor gear ratio is 150/7.1 = 21.2
+                          //post about conversion factors: https://www.chiefdelphi.com/t/yet-another-generic-swerve-library-yagsl-beta/425148/885?page=44
+
     // Motor conversion factor is (PI * WHEEL DIAMETER IN METERS) / (GEAR RATIO * ENCODER RESOLUTION).
     //  In this case the wheel diameter is 4 inches, which must be converted to meters to get meters/second.
     //  The gear ratio is 6.75 motor revolutions per wheel rotation.
